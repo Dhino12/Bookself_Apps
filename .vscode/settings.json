@@ -1,0 +1,21 @@
+{
+    "editor.codeActionsOnSave": true,
+    "editor.fontFamily": "Consolas, monospace, 'Droid Sans Fallback'",
+    "workbench.colorTheme": "One Dark Pro",
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.fontSize": 15,
+
+    "[html],[js],[css]": {
+        "editor.defaultFormatter": "HookyQR.beautify",
+        "editor.wordWrap": "on",
+    },
+
+    "settingsSync.ignoredExtensions": [
+        "HookyQR.beautify"
+    ],
+    "beautify.ignore": [
+        "html",
+        "css",
+        "javascript"
+    ],
+}

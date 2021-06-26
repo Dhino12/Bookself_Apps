@@ -1,0 +1,31 @@
+body {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ececec;
+}
+
+.container-sidebar{
+    width: 270px;
+    height: 930px;
+    padding-top: 10px;
+    margin-top: 20px;
+    background-color: aqua;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.logo {
+    color: white;
+    margin-left: 10%;
+    margin-top: 10%;
+    overflow: hidden;
+}
+
+.logo img{
+    float: left;
+}
+.logo h1{
+    margin: 15px 0 0 80px;
+}
