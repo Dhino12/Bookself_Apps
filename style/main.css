@@ -8,18 +8,19 @@ body {
 
 .container-sidebar{
     width: 270px;
-    height: 930px;
+    height: 870px;
     padding-top: 10px;
     margin-top: 20px;
-    background-color: aqua;
+    background-color: #4b88bb;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
 .logo {
     color: white;
-    margin-left: 10%;
+    margin-left: 30px;
     margin-top: 10%;
+    margin-bottom: 60%;
     overflow: hidden;
 }
 
@@ -28,4 +29,30 @@ body {
 }
 .logo h1{
     margin: 15px 0 0 80px;
+}
+
+.item{
+    color: white;
+    margin-left: 40px;
+    margin-top: 20%;
+    overflow: hidden;
+}
+
+.item svg{
+    float: left;
+    background-color: white;
+    padding: 6px;
+    fill: #4b88bb;
+    border-radius: 5px;
+}
+
+.item h3{
+    margin: 7px 0 0 60px;
+}
+
+.icon-show-book{
+    width: 60px;
+    height: 60px;
+    background-image: url(../asset/icon/show_book.svg);
+    background-size: cover;
 }
