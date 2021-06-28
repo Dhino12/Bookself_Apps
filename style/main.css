@@ -12,7 +12,7 @@ header{
 }
 
 .search{
-    width: 1000px;
+    width: 1100px;
     margin-top: 3%;
     margin-left: 5%;
     float: left;
@@ -21,7 +21,7 @@ header{
 .search svg{
     fill:  #4b88bb;
     padding: 10px;
-    background-color: white;
+    background-color: #f3f3f3;
     border-radius: 10px;
     float: left;
 }
@@ -33,7 +33,16 @@ header{
     padding: 10px;
     border: 0;
     border-bottom: 1px solid grey;
-    background-color: #ececec;
+    background-color: #ececec; 
+    float: left;
+}
+
+.search p{
+    margin-left: 30px;
+    margin-bottom: 0;
+    margin-top: 20px;
+    color: grey;
+    display: inline-block;
 }
 
 .logo {
@@ -54,12 +63,78 @@ header{
 }
 /* end header */
 
-/* sidebar */
+/* article just-read */
+.just-read, .already-read{
+    background-color: #f3f3f3;
+    width: 600px;
+    height: 700px;
+    margin-left: 5%;
+    margin-top: 50px;
+    padding: 10px 0 30px 30px;
+    border-radius: 10px;
+    display: inline-block;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.content-book{
+    width: 95%;
+    margin-top: 40px;
+    padding: 10px;
+    overflow: hidden;
+    color: #4b88bb;
+    border-radius: 10px;
+}
+
+.content-book img{
+    float: left;
+    margin-right: 30px;
+}
+
+.description{
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+   -webkit-box-orient: vertical;
+}
+
+.finish-read, .favorite-book{
+    width: 35%;
+    background-color: #4b88bb;
+    display: inline-block;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+
+.finish-read svg, .favorite-book svg{
+    float: left;
+    margin: 9px 10px 0 20px;
+}
+
+.finish-read h3, .favorite-book h3{
+    margin: 9px 0;
+    color: white;
+}
+
+.finish-read:hover{
+    background-color: green;
+    cursor: pointer;
+}
+
+.favorite-book:hover{
+    background-color: magenta;
+    cursor: pointer;
+}
+/* end article just-read */
+
+/* sidebar */ 
 .container-sidebar{
     width: 270px;
     height: 730px;
     padding-top: 10px;
-    margin-top: 20px;
+    margin-top: 50px;
+    float: left;
     background-color: #4b88bb;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -78,6 +153,7 @@ header{
     border-bottom-right-radius: 20px;
     color: #4b88bb;
     fill: #4b88bb;
+    cursor: pointer;
 }
 
 .item svg{
