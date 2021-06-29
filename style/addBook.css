@@ -1,13 +1,70 @@
+/* form-addBook */
 .form-addBook{
     width: 1024px;
     display: inline-block;
     margin-top: 50px;
     margin-left: 10%;
     padding: 10px 30px 30px 30px;
-    background-color: yellow;
 }
 
 .form-addBook h1{
     text-align: center;
+    margin-bottom: 50px;
+}
+/* end .form-addBook */
+
+.shadow-fluent{
+    box-shadow: 2px 5px 10px #d8d8d8, -2px -2px 5px white;
 }
 
+.shadow-fluent:hover{
+    box-shadow: 2px 5px 5px #dbdbdb inset, -2px -2px 5px white inset;
+}
+
+/* title-book */
+.form-title-book{
+    margin: 20px 30px 20px 30px;
+}
+
+label{
+    color: #727272;
+}
+
+input[type="text"]{
+    width: 100%;
+    padding: 20px 10px;
+    font-size: 24px;
+    border: none;
+    margin-top: 15px;
+    border-radius: 8px;
+    background-color: transparent;
+    
+}
+
+input[type="text"]:focus{
+    outline: none;
+    border-style: solid;
+    border-color: #4b88bb;
+    border-image: initial;
+    border-width: 2px;
+    margin-top: 15px;
+    border-radius: 8px;
+}
+
+/* end title-book */
+
+/* button */
+.form-button-submit{
+    padding: 10px 55px;
+    margin-top: 10px;
+    float: right;
+    font-size: 20px;
+    border-radius: 8px;
+    outline: none;
+    border: none;
+}
+
+.form-button-submit:hover{
+    cursor: pointer;
+}
+/* end button */
