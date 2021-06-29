@@ -1,0 +1,13 @@
+.form-addBook{
+    width: 1024px;
+    display: inline-block;
+    margin-top: 50px;
+    margin-left: 10%;
+    padding: 10px 30px 30px 30px;
+    background-color: yellow;
+}
+
+.form-addBook h1{
+    text-align: center;
+}
+
