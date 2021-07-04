@@ -1,12 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
     const submitForm = document.getElementById("form")
     
-    submitForm.addEventListener("submit", function(event){
-        event.preventDefault()
-        addBook()
-    })
+    if(window.location.pathname === "/addBook.html"){
+        submitForm.addEventListener("submit", function(event){
+            event.preventDefault()
+            addBook()
+        })
 
-    if(isStorageExist()){
-        loadDataFromStorage()
+    }else if(window.location.pathname === "/main.html"){
+        if(isStorageExist()){
+            loadDataFromStorage()
+        }
     }
+
+})
+
+document.addEventListener("ondataloaded", () => {
+    showBook();
 })

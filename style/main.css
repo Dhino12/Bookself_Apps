@@ -153,17 +153,16 @@ header {
     float: left;
     margin-right: 30px;
 }
-
-.content-book h2,
+ 
 .content-book p {
-    margin: 0px 0 10px 0;
+    color: grey; 
 }
 
-.description {
+.description, .author, .content-book h2 {
     overflow: hidden;
+    margin: 0px 0 10px 0;
     text-overflow: ellipsis;
     display: -webkit-box;
-    color: grey;
     -webkit-line-clamp: 2;
     /* number of lines to show */
     -webkit-box-orient: vertical;
@@ -171,8 +170,7 @@ header {
 
 /* ==== finish read button & favorite button ===== */
 
-.content-book button{
-    width: 35%;
+.content-book button{ 
     background-color: #ececec;
     box-shadow: 2px 5px 10px #d8d8d8, -2px -2px 5px white;
     display: inline-block;
@@ -181,13 +179,13 @@ header {
     border: none;
 }
 
-.icon-read {
+.icon-finish-read {
     background-image: url("../asset/icon/done.svg");
     width: 24px;
     height: 24px;
     background-size: contain;
     float: left;
-    margin: 6px 10px 0 20px;
+    margin: 6px;
     transition: 0.5s ease;
 }
 
@@ -197,17 +195,30 @@ header {
     height: 24px;
     background-size: contain;
     float: left;
-    margin: 6px 10px 0 20px;
+    margin: 6px;
     transition: 0.5s ease;
-}
+}  
 
-.content-book button h3{
-    margin: 10px 0;
-    color: #4b88bb;
+.icon-remove{
+    background-image: url("../asset/icon/remove.svg");
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    float: left;
+    margin: 6px;
     transition: 0.5s ease;
-}
+}  
 
-.content-book button:hover h3,
+.icon-back-read{
+    background-image: url("../asset/icon/back_read.svg");
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    float: left;
+    margin: 6px;
+    transition: 0.5s ease;
+}  
+
 .content-book button:hover .icon-favorite,
 .content-book button:hover .icon-read {
     transform: scale(0.9);
@@ -219,6 +230,13 @@ header {
 }
 
 /* ==== end finish read button & favorite button ===== */
+
+.year{
+    float: right;
+    margin-top: 20px;
+    margin-right: 10px;
+    color: #777777;
+}
 /* end article just-read & already-read */
 
 /* sidebar */
