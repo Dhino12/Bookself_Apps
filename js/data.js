@@ -22,7 +22,7 @@ function loadDataFromStorage(){
     let data = JSON.parse(serializedData);
     console.log("jsonData : " + data);
 
-    if(data != null){
+    if(data !== null){
         books = data;
         console.log("Book data: " + books);
     }

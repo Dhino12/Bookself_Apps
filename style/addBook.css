@@ -70,3 +70,46 @@ input[type="text"]:focus{
     color: #4b88bb;
 }
 /* end button */
+
+/* message */
+.message{
+    top: 50%;
+    left: 45%;
+    align-items: center;
+    padding: 0px 30px;
+    border-radius: 8px;
+    box-shadow: 2px 5px 10px #d8d8d8, -2px -2px 5px white; 
+    display: none; 
+}
+
+.background-message{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0; 
+    background-color: #46464644;
+    display: none; 
+}
+
+.fade{
+    position: fixed;
+    display: block; 
+    opacity: 0;
+    animation: fade 5s ease alternate;
+}
+
+@keyframes fade{
+    25%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 1;
+    }
+    75%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+/* end-message */

@@ -18,16 +18,19 @@ for (const i in itemSideBar) {
 
 
 function addBook() {
-
+    if(books.length === 0){
+        loadDataFromStorage();
+    }
+    
     const textTitle = document.getElementById("title").value
     const textAuthor = document.getElementById("author").value
     const textDescription = document.getElementById("description").value
     const textDate = document.getElementById("date").value.slice(0, 4);
 
-    console.log(textTitle + " " + textAuthor + " " + textDescription + " " + textDate)
+    console.log("title: " + textTitle + "\nYear: " + textDate)
 
     const bookObject = composeBookObject(textTitle, textDescription, textAuthor, textDate, false)
-
+    
     books.push(bookObject);
 
     updateDataToStorage();
@@ -63,15 +66,16 @@ function makeBook(title, author, description, date, isCompleted) {
 
     const textAuthor = document.createElement("p");
     textAuthor.classList.add("author");
-    textAuthor.innerText = author;
+    textAuthor.style.textTransform = "capitalize";
+    textAuthor.innerText = "Author : " + author;
 
     const textTitle = document.createElement("h2");
     textTitle.innerText = title;
-    textTitle.style.textTransform = "capitalize"
+    textTitle.style.textTransform = "capitalize";
 
     const textDesc = document.createElement("span");
     textDesc.classList.add("year");
-    textDesc.innerText = date;
+    textDesc.innerText = "dibaca tahun : " + date;
 
     const textYear = document.createElement("p");
     textYear.classList.add("description");
@@ -129,7 +133,7 @@ function createFavoriteButton() {
 
 function createRemoveButton() {
     return createButton('icon-remove', function (e) {
-
+        removeBookFromComplete(e)
     });
 }
 
@@ -143,21 +147,19 @@ function createUndoButton() {
 function addBookToFinishRead(bookElement) {
 
     const bookTitle = bookElement.querySelector("h2").innerText;
-    console.log(bookTitle);
-
-    const bookAuthor = bookElement.querySelector(".author").innerText;
+    const bookAuthor = bookElement.querySelector(".author").innerText.split(' ')[2];
     const bookDesc = bookElement.querySelector(".description").innerText;
-    const bookYear = bookElement.querySelector(".year").innerText;
+    const bookYear = bookElement.querySelector(".year").innerText.split(' ')[3];
 
     const newBook = makeBook(bookTitle, bookAuthor, bookDesc, bookYear, true);
     const listCompletedBook = document.getElementById(LIST_COMPLETE_READ_BOOK_ID);
 
-    const book = findBook(bookElement[BOOK_ID])
+    const book = findBook(bookElement[BOOK_ID]);
 
     book.isCompleted = true;
     newBook[BOOK_ID] = book.id;
 
-    listCompletedBook.append(newBook)
+    listCompletedBook.append(newBook);
 
     bookElement.remove();
 
@@ -169,10 +171,9 @@ function undoBookFromComplete(bookElement) {
 
     // console.log(bookElement.querySelector("h2"));
     const bookTitle = bookElement.querySelector("h2").innerText;
-
-    const bookAuthor = bookElement.querySelector(".author").innerText;
+    const bookAuthor = bookElement.querySelector(".author").innerText.split(' ')[2];
     const bookDesc = bookElement.querySelector(".description").innerText;
-    const bookYear = bookElement.querySelector(".year").innerText;
+    const bookYear = bookElement.querySelector(".year").innerText.split(' ')[3];
 
     const newBook = makeBook(bookTitle, bookAuthor, bookDesc, bookYear, false);
 
@@ -185,4 +186,12 @@ function undoBookFromComplete(bookElement) {
     bookElement.remove();
 
     updateDataToStorage();
+}
+
+function removeBookFromComplete(bookElement){
+    const bookPosition = findBookIndex(bookElement[BOOK_ID])
+    books.splice(bookPosition, 1);
+
+    bookElement.remove();
+    updateDataToStorage()
 }
