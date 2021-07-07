@@ -1,6 +1,8 @@
 const locationHere = window.location.pathname;
 
 document.addEventListener("DOMContentLoaded", () => {
+    
+    
     const submitForm = document.getElementById("form")
     
     if(locationHere === "/addBook.html"){
@@ -8,9 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
             addBook();   
         })
-
+        
     }else if(locationHere === "/main.html"){
         if(isStorageExist()){
+            validateData()
             loadDataFromStorage();
         }
     }
@@ -47,3 +50,21 @@ document.addEventListener('ondatasaved', () => {
     
     }
 })
+
+function validateData(){
+    const serializedData = localStorage.getItem(STORAGE_KEY);
+
+    const notFound = document.getElementsByClassName("not-found")[0]
+    const getAllArticle = document.getElementsByTagName("article");
+    notFound.hidden = true
+
+    if(serializedData === "[]"){
+        notFound.removeAttribute("hidden");
+
+        for (const article of getAllArticle) {
+            article.style.display = "none";
+        }
+
+    }
+    
+}

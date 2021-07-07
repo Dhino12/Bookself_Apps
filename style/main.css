@@ -80,7 +80,6 @@ header {
     left: 40%;
     align-items: center;
     text-align: center;
-    display: none;
 }
 
 .not-found a {
@@ -158,13 +157,21 @@ header {
     color: grey; 
 }
 
-.description, .author, .content-book h2 {
+.description, .author{
     overflow: hidden;
     margin: 0px 0 10px 0;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.content-book h2{
+    overflow: hidden;
+    margin: 0px 0 10px 0;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
 

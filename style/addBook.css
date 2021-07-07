@@ -73,12 +73,15 @@ input[type="text"]:focus{
 
 /* message */
 .message{
-    top: 50%;
+    top: 40%;
     left: 45%;
+    position: fixed;
     align-items: center;
     padding: 0px 30px;
     border-radius: 8px;
     box-shadow: 2px 5px 10px #d8d8d8, -2px -2px 5px white; 
+    text-align: center;
+    font-size: 2ch;
     display: none; 
 }
 
