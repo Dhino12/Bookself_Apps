@@ -27,7 +27,7 @@ function addBook() {
     const textDescription = document.getElementById("description").value
     const textDate = document.getElementById("date").value.slice(0, 4);
 
-    console.log("title: " + textTitle + "\nYear: " + textDate)
+    // console.log("title: " + textTitle + "\nYear: " + textDate)
 
     const bookObject = composeBookObject(textTitle, textDescription, textAuthor, textDate, false)
     
@@ -42,7 +42,6 @@ function showBook() {
 
     for (const book of books) {
 
-        console.log(book.desc);
         const newBook = makeBook(book.title, book.author, book.desc, book.year, book.isCompleted);
 
         newBook[BOOK_ID] = book.id
@@ -51,18 +50,51 @@ function showBook() {
             completeBookList.append(newBook);
 
         } else {
-            console.log("tidak complete");
+            // console.log("tidak complete");
             uncompleteBookList.append(newBook)
 
         }
+
     }
+
+
+    document.getElementById('search-book').addEventListener("input", () => {
+        completeBookList.style.display = "none";
+        const titleBook = document.getElementById('search-book').value.toLowerCase().trim()
+        const content_book = document.querySelectorAll(".content-book"); 
+        const content_book_search = document.querySelectorAll(".content-book-search"); 
+
+        if(content_book.length !== 0){  
+            for(let i = 0; i < content_book.length; i++){
+                content_book[i].remove();
+            } 
+        }
+        
+        if(content_book_search.length !== 0){ 
+            for(let i = 0; i < content_book_search.length; i++){
+                content_book_search[i].remove();
+            } 
+            showBook();
+            completeBookList.removeAttribute("style");
+        }else{
+            if(titleBook.length !== 0){
+                const bookSearch = searchData(titleBook)
+                
+                if(bookSearch === undefined){
+                    completeBookList.removeAttribute("style");
+                    return;
+                }
+                const newBook = makeBook(bookSearch.title, bookSearch.author, bookSearch.desc, bookSearch.year, bookSearch.isCompleted, true)
+                newBook[BOOK_ID] = bookSearch.id
+                uncompleteBookList.append(newBook);
+            }
+        }
+        
+    })
 
 }
 
-function makeBook(title, author, description, date, isCompleted) {
-    const image = document.createElement("img");
-    image.setAttribute('src', '../asset/image/book.jpg');
-    image.setAttribute('width', '95px');
+function makeBook(title, author, description, date, isCompleted, isSearch) {
 
     const textAuthor = document.createElement("p");
     textAuthor.classList.add("author");
@@ -82,9 +114,13 @@ function makeBook(title, author, description, date, isCompleted) {
     textYear.innerText = description;
 
     const container = document.createElement("div")
-    container.classList.add("content-book");
+    if(isSearch){
+        container.classList.add("content-book-search");
+    }else{
+        container.classList.add("content-book");
+    }
 
-    container.append(image, textTitle, textAuthor, textYear, textDesc);
+    container.append(textTitle, textAuthor, textYear, textDesc);
 
 
     if (isCompleted) {
@@ -190,8 +226,7 @@ function undoBookFromComplete(bookElement) {
 
 function removeBookFromComplete(bookElement){
     const bookPosition = findBookIndex(bookElement[BOOK_ID])
-    books.splice(bookPosition, 1);
+    removeData(bookPosition, 1);
 
     bookElement.remove();
-    updateDataToStorage()
 }

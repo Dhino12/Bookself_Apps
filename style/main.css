@@ -149,6 +149,8 @@ header {
 }
 
 .content-book img {
+    width: 95px;
+    height: 151px;
     float: left;
     margin-right: 30px;
 }

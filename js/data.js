@@ -35,14 +35,15 @@ function updateDataToStorage(){
     }
 }
 
-function composeBookObject(title, desc, author, year, isCompleted){
+function composeBookObject(title, desc, author, year, isCompleted, imgBook){
     return {
         id: new Date(),
         title,
         desc,
         author, 
         year,
-        isCompleted
+        isCompleted,
+        imgBook
     }
 }
 
@@ -61,6 +62,24 @@ function findBookIndex(bookId){
         index++;
     }
     return -1;
+}
+
+function removeData(bookPosition, limitRemove){
+    books.splice(bookPosition, limitRemove);
+    updateDataToStorage()
+
+    document.dispatchEvent(new Event("ondataremove"))
+}
+
+function searchData(title){
+    for (const book of books) {
+        if(
+            book.title.toLowerCase().trim().indexOf(title) !== undefined && 
+            book.title.toLowerCase().trim().indexOf(title) !== -1){
+            console.log(book.title);
+            return book
+        }
+    }
 }
 
 // function refreshFromBook(){

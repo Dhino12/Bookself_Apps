@@ -38,16 +38,17 @@ document.addEventListener('ondatasaved', () => {
         bgMessage.classList.add("fade");
         message.classList.add("fade");
 
-        // bgMessage.style.display = "block";
-        // message.style.display = "block";
-        
         setTimeout(() => {
             bgMessage.classList.remove("fade");
             message.classList.remove("fade");
-            // bgMessage.style.display = "none"
-            // message.style.display = "none"
         }, 4000);
     
+    }
+})
+
+document.addEventListener('ondataremove', () => {
+    if(locationHere === "/main.html"){
+        validateData();
     }
 })
 
