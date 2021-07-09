@@ -50,7 +50,6 @@ function showBook() {
             completeBookList.append(newBook);
 
         } else {
-            // console.log("tidak complete");
             uncompleteBookList.append(newBook)
 
         }
@@ -70,25 +69,26 @@ function showBook() {
             } 
         }
         
-        if(content_book_search.length !== 0){ 
-            for(let i = 0; i < content_book_search.length; i++){
-                content_book_search[i].remove();
-            } 
-            showBook();
-            completeBookList.removeAttribute("style");
-        }else{
-            if(titleBook.length !== 0){
-                const bookSearch = searchData(titleBook)
-                
-                if(bookSearch === undefined){
-                    completeBookList.removeAttribute("style");
-                    return;
-                }
+        for(let i = 0; i < content_book_search.length; i++){
+            content_book_search[i].remove();
+        } 
+
+        if(titleBook.length !== 0){
+            const bookSearch = searchData(titleBook)
+            
+            if(bookSearch === undefined){
+                completeBookList.removeAttribute("style");
+            }else{
                 const newBook = makeBook(bookSearch.title, bookSearch.author, bookSearch.desc, bookSearch.year, bookSearch.isCompleted, true)
                 newBook[BOOK_ID] = bookSearch.id
                 uncompleteBookList.append(newBook);
             }
+        }else{
+            showBook()
+            completeBookList.removeAttribute("style");
         }
+
+        return
         
     })
 
