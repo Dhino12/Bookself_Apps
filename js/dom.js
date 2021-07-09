@@ -75,20 +75,22 @@ function showBook() {
 
         if(titleBook.length !== 0){
             const bookSearch = searchData(titleBook)
-            
+            console.log(bookSearch);
+
             if(bookSearch === undefined){
                 completeBookList.removeAttribute("style");
             }else{
-                const newBook = makeBook(bookSearch.title, bookSearch.author, bookSearch.desc, bookSearch.year, bookSearch.isCompleted, true)
-                newBook[BOOK_ID] = bookSearch.id
-                uncompleteBookList.append(newBook);
+                for (const book of bookSearch) {
+                    const newBook = makeBook(book.title, book.author, book.desc, book.year, book.isCompleted, true)
+                    newBook[BOOK_ID] = book.id
+                    uncompleteBookList.append(newBook);
+                }
             }
+            
         }else{
             showBook()
             completeBookList.removeAttribute("style");
         }
-
-        return
         
     })
 

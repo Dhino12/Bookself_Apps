@@ -72,14 +72,16 @@ function removeData(bookPosition, limitRemove){
 }
 
 function searchData(title){
+    const bookSearch = [];
     for (const book of books) {
         if(
             book.title.toLowerCase().trim().indexOf(title) !== undefined && 
             book.title.toLowerCase().trim().indexOf(title) !== -1){
             console.log(book.title);
-            return book
+            bookSearch.push(book)
         }
     }
+    return bookSearch
 }
 
 // function refreshFromBook(){
