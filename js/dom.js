@@ -27,7 +27,7 @@ function addBook() {
     const textDescription = document.getElementById("description").value
     const textDate = document.getElementById("date").value.slice(0, 4);
 
-    // console.log("title: " + textTitle + "\nYear: " + textDate)
+    console.log("title: " + textTitle + "\nYear: " + textDate)
 
     const bookObject = composeBookObject(textTitle, textDescription, textAuthor, textDate, false)
     
@@ -46,10 +46,10 @@ function showBook() {
 
         newBook[BOOK_ID] = book.id
 
-        if (book.isCompleted) {
+        if (book.isCompleted) { 
             completeBookList.append(newBook);
 
-        } else {
+        } else { 
             uncompleteBookList.append(newBook)
 
         }
@@ -57,8 +57,9 @@ function showBook() {
     }
 
 
+    // search book ===========
     document.getElementById('search-book').addEventListener("input", () => {
-        completeBookList.style.display = "none";
+        // completeBookList.style.display = "none";
         const titleBook = document.getElementById('search-book').value.toLowerCase().trim()
         const content_book = document.querySelectorAll(".content-book"); 
         const content_book_search = document.querySelectorAll(".content-book-search"); 
@@ -78,7 +79,7 @@ function showBook() {
             console.log(bookSearch);
 
             if(bookSearch === undefined){
-                completeBookList.removeAttribute("style");
+                // completeBookList.removeAttribute("style");
             }else{
                 for (const book of bookSearch) {
                     const newBook = makeBook(book.title, book.author, book.desc, book.year, book.isCompleted, true)
@@ -89,7 +90,6 @@ function showBook() {
             
         }else{
             showBook()
-            completeBookList.removeAttribute("style");
         }
         
     })
@@ -97,6 +97,9 @@ function showBook() {
 }
 
 function makeBook(title, author, description, date, isCompleted, isSearch) {
+
+    const completeBookList = document.getElementById(LIST_COMPLETE_READ_BOOK_ID);
+    const uncompleteBookList = document.getElementById(LIST_UNCOMPLETE_READ_BOOK_ID);
 
     const textAuthor = document.createElement("p");
     textAuthor.classList.add("author");
@@ -228,7 +231,33 @@ function undoBookFromComplete(bookElement) {
 
 function removeBookFromComplete(bookElement){
     const bookPosition = findBookIndex(bookElement[BOOK_ID])
-    removeData(bookPosition, 1);
+    const message = document.getElementById("confirm");
+    const bgMessage = document.getElementsByClassName("background-message")[0];
 
-    bookElement.remove();
+    const chooseYes = document.getElementById("yes");
+    const chooseNo = document.getElementById("no");
+    
+    bgMessage.classList.add("fade");
+    message.classList.add("fade");
+
+    chooseYes.addEventListener('click', () => {
+        removeData(bookPosition, 1);
+        bookElement.remove();
+        messageRemove(bgMessage, message)
+    })
+
+    chooseNo.addEventListener('click', () => {
+        messageRemove(bgMessage, message)
+    })
+}
+
+function messageRemove(bgMessage, message){
+    bgMessage.style.animation = "fadeOut 0.5s ease"
+    message.style.animation = "fadeOut 0.5s ease"
+    setTimeout(() => {
+        bgMessage.removeAttribute("style")
+        message.removeAttribute("style")
+        bgMessage.classList.remove("fade");
+        message.classList.remove("fade");
+    }, 500);
 }

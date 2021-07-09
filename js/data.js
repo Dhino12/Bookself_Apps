@@ -77,7 +77,6 @@ function searchData(title){
         if(
             book.title.toLowerCase().trim().indexOf(title) !== undefined && 
             book.title.toLowerCase().trim().indexOf(title) !== -1){
-            console.log(book.title);
             bookSearch.push(book)
         }
     }

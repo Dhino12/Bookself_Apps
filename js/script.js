@@ -1,17 +1,18 @@
 const locationHere = window.location.pathname;
+const headPage = document.getElementsByTagName("title")[0].innerText
 
 document.addEventListener("DOMContentLoaded", () => {
     
     
     const submitForm = document.getElementById("form")
     
-    if(locationHere === "/addBook.html"){
+    if(locationHere === "/addBook.html" || headPage === "Tambah Buku"){
         submitForm.addEventListener("submit", function(event){
             event.preventDefault();
             addBook();   
         })
         
-    }else if(locationHere === "/main.html"){
+    }else if(locationHere === "/main.html" || headPage === "Book"){
         if(isStorageExist()){
             validateData()
             loadDataFromStorage();
@@ -19,15 +20,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 })
-
+console.log(window.location.pathname);
 document.addEventListener("ondataloaded", () => {
-    if(window.location.pathname === "/main.html") {
+    if(window.location.pathname === "/main.html" || headPage === "Book") {
         showBook();
     }
 })
 
 document.addEventListener('ondatasaved', () => {
-    if(locationHere === "/addBook.html"){
+    if(locationHere === "/addBook.html" || headPage === "Tambah Buku"){
 
         const submitForm = document.getElementById("form")
         submitForm.reset();
@@ -47,7 +48,7 @@ document.addEventListener('ondatasaved', () => {
 })
 
 document.addEventListener('ondataremove', () => {
-    if(locationHere === "/main.html"){
+    if(locationHere === "/main.html" || headPage === "Book"){
         validateData();
     }
 })
