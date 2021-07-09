@@ -16,6 +16,10 @@ for (const i in itemSideBar) {
 }
 // ==========================
 
+// date ==============
+const date = new Date().toString().split(' ').splice(1,3).join(' - ');
+document.querySelector('.search p').innerText = date
+// =============
 
 function addBook() {
     if(books.length === 0){
@@ -97,9 +101,6 @@ function showBook() {
 }
 
 function makeBook(title, author, description, date, isCompleted, isSearch) {
-
-    const completeBookList = document.getElementById(LIST_COMPLETE_READ_BOOK_ID);
-    const uncompleteBookList = document.getElementById(LIST_UNCOMPLETE_READ_BOOK_ID);
 
     const textAuthor = document.createElement("p");
     textAuthor.classList.add("author");
