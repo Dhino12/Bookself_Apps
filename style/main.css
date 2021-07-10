@@ -263,7 +263,8 @@ header {
 
 .item {
     color: white;
-    margin-top: 5%;
+    margin-top: 10px;
+    margin-bottom: 10px;
     overflow: hidden;
     padding: 15px 0;
     transition: 0.8s ease;
@@ -379,3 +380,39 @@ header {
     }
 }
 /* end-message */
+
+@media only screen and (max-width: 1024px){
+    .logo{
+        margin: 60px 0 20px 40px;
+    }
+
+    .search{
+        margin: 30px 10px 0px 10px;
+    }
+
+    .search #search-book{
+        display: block;
+    }
+    
+    .search p{
+        display: none;
+    }
+
+    .just-read,
+    .already-read{
+        width: 380px;
+        height: fit-content;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .container-sidebar{
+        width: 100%;
+        height: fit-content;
+    }
+
+    .message{
+        left: 10%;
+        right: 10%;
+    }
+}

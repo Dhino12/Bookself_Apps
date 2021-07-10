@@ -1,25 +1,21 @@
 const LIST_UNCOMPLETE_READ_BOOK_ID = "uncomplete-read"
 const LIST_COMPLETE_READ_BOOK_ID = "complete-read";
 const BOOK_ID = "book_id";
+const headPage = document.getElementsByTagName("title")[0].innerText
 
 // ======== sidebar =============
 const itemSideBar = document.querySelectorAll(".item");
 
 for (const i in itemSideBar) {
-    if (window.location.pathname === "/addBook.html") {
+    if (window.location.pathname === "/addBook.html" || headPage === "Tambah Buku") {
         itemSideBar[1].classList.add('active');
 
-    } else if (window.location.pathname === "/main.html") {
+    } else if (window.location.pathname === "/main.html" || headPage === "Book") {
         itemSideBar[0].classList.add('active');
 
     }
 }
 // ==========================
-
-// date ==============
-const date = new Date().toString().split(' ').splice(1,3).join(' - ');
-document.querySelector('.search p').innerText = date
-// =============
 
 function addBook() {
     if(books.length === 0){

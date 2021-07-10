@@ -1,5 +1,4 @@
 const locationHere = window.location.pathname;
-const headPage = document.getElementsByTagName("title")[0].innerText
 
 document.addEventListener("DOMContentLoaded", () => {
     
@@ -17,6 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
             validateData()
             loadDataFromStorage();
         }
+
+        // date ==============
+        const date = new Date().toString().split(' ').splice(1,3).join(' - ');
+        document.querySelector('.search p').innerText = date
+        // =============
+        
     }
 
 })

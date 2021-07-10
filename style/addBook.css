@@ -10,6 +10,7 @@
 .form-addBook h1{
     text-align: center;
     margin-bottom: 50px;
+    color: #4b88bb;
 }
 /* end .form-addBook */
 
@@ -116,3 +117,25 @@ input[type="text"]:focus{
     }
 }
 /* end-message */
+
+@media only screen and (max-width: 1024px){
+    .form-addBook{
+        width: fit-content;
+        margin-left: 0;
+        padding: 0 30px 0 10px;
+    }
+    
+    .form-title-book{
+        margin: 20px 0 20px 0;
+    }
+
+    input[type="text"],
+    input[type="date"]{
+        width: 100%;
+    }
+
+    .message{
+        left: 10%;
+        right: 10%;
+    }
+}
