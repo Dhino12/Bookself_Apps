@@ -1,5 +1,6 @@
 const LIST_UNCOMPLETE_READ_BOOK_ID = "uncomplete-read"
 const LIST_COMPLETE_READ_BOOK_ID = "complete-read";
+const LIST_FAVORITED_BOOK_ID = "book-favorited"
 const BOOK_ID = "book_id";
 const headPage = document.getElementsByTagName("title")[0].innerText
 
@@ -29,7 +30,7 @@ function addBook() {
 
     console.log("title: " + textTitle + "\nYear: " + textDate)
 
-    const bookObject = composeBookObject(textTitle, textDescription, textAuthor, textDate, false)
+    const bookObject = composeBookObject(textTitle, textDescription, textAuthor, textDate, false, false)
     
     books.push(bookObject);
 
@@ -42,7 +43,7 @@ function showBook() {
 
     for (const book of books) {
 
-        const newBook = makeBook(book.title, book.author, book.desc, book.year, book.isCompleted);
+        const newBook = makeBook(book.title, book.author, book.desc, book.year, book.isCompleted, false, book.isFavorite);
 
         newBook[BOOK_ID] = book.id
 
@@ -93,10 +94,26 @@ function showBook() {
         }
         
     })
-
 }
 
-function makeBook(title, author, description, date, isCompleted, isSearch) {
+function showFavoriteBook(){
+
+    const favoritedBookList = document.getElementById(LIST_FAVORITED_BOOK_ID);
+    for (const book of books) {
+
+        const newBook = makeBook(book.title, book.author, book.desc, book.year, book.isCompleted, false, book.isFavorite);
+
+        newBook[BOOK_ID] = book.id
+
+        if (book.isFavorite) { 
+            favoritedBookList.append(newBook);
+
+        }
+
+    }
+}
+
+function makeBook(title, author, description, date, isCompleted, isSearch, isFavorite) {
 
     const textAuthor = document.createElement("p");
     textAuthor.classList.add("author");
@@ -121,17 +138,24 @@ function makeBook(title, author, description, date, isCompleted, isSearch) {
     }else{
         container.classList.add("content-book");
     }
-
+    
     container.append(textTitle, textAuthor, textYear, textDesc);
+    
+    console.log(isCompleted);
 
-
-    if (isCompleted) {
-        container.append(createUndoButton(), createRemoveButton());
-
-    } else {
-        container.append(createFinishReadButton(), createFavoriteButton());
-
+    if(headPage === "Book"){
+        if (isCompleted) {
+            container.append(createUndoButton(), createRemoveButton());
+    
+        } else {
+            container.append(createFinishReadButton(), createFavoriteButton(isFavorite));
+    
+        }
+    }else{
+        container.append(createFavoriteButton(isFavorite));
     }
+    
+    console.log(container);
     return container;
 }
 
@@ -146,11 +170,12 @@ function createButton(classIcon, eventListener) {
     button.addEventListener("click", e => {
         if (e.target.className === classIcon) {
             // if span is clicked
-            eventListener(e.target.parentElement.parentElement)
+            eventListener(e.target.parentElement.parentElement);
 
         } else {
             // if button is clicked
-            eventListener(e.target.parentElement)
+            eventListener(e.target.parentElement);
+
         }
     })
     return button
@@ -158,26 +183,35 @@ function createButton(classIcon, eventListener) {
 
 function createFinishReadButton() {
     return createButton('icon-finish-read', function (e) {
-        addBookToFinishRead(e)
+        addBookToFinishRead(e);
 
     });
 }
 
-function createFavoriteButton() {
-    return createButton('icon-favorite', function (e) {
-
-    });
+function createFavoriteButton(isFavorite) {
+    if(isFavorite){
+        return createButton('icon-favorited', function (e) {
+            addToFavorite(e);
+            location.reload();
+        });
+    }else{
+        return createButton('icon-favorite', function (e) {
+            addToFavorite(e);
+            location.reload()
+        });
+    }
+    
 }
 
 function createRemoveButton() {
     return createButton('icon-remove', function (e) {
-        removeBookFromComplete(e)
+        removeBookFromComplete(e);
     });
 }
 
 function createUndoButton() {
     return createButton('icon-back-read', function (e) {
-        undoBookFromComplete(e)
+        undoBookFromComplete(e);
 
     });
 }
@@ -202,6 +236,18 @@ function addBookToFinishRead(bookElement) {
     bookElement.remove();
 
     updateDataToStorage();
+}
+
+function addToFavorite(bookElement){
+    const book = findBook(bookElement[BOOK_ID]);
+
+    if(book.isFavorite === true){
+        book.isFavorite = false;
+    }else{
+        book.isFavorite = true;
+    }
+    updateDataToStorage();
+
 }
 
 function undoBookFromComplete(bookElement) {

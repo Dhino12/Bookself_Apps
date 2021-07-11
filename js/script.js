@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
     }else if(locationHere === "/main.html" || headPage === "Book"){
         if(isStorageExist()){
-            validateData()
+            validateData();
             loadDataFromStorage();
         }
 
@@ -22,20 +22,30 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector('.search p').innerText = date
         // =============
         
+    }else if(locationHere === "/favorite.html" || headPage === "Favorite"){
+        if(isStorageExist()){
+            validateData();
+            loadDataFromStorage();
+        }
     }
 
 })
+
 console.log(window.location.pathname);
+
 document.addEventListener("ondataloaded", () => {
-    if(window.location.pathname === "/main.html" || headPage === "Book") {
+    if(locationHere === "/main.html" || headPage === "Book") {
         showBook();
+
+    }else if(locationHere === "/favorite.html" || headPage === "Favorite"){
+        showFavoriteBook();
     }
 })
 
 document.addEventListener('ondatasaved', () => {
     if(locationHere === "/addBook.html" || headPage === "Tambah Buku"){
 
-        const submitForm = document.getElementById("form")
+        const submitForm = document.getElementById("form");
         submitForm.reset();
         
         const bgMessage = document.getElementsByClassName("background-message")[0];
@@ -55,15 +65,16 @@ document.addEventListener('ondatasaved', () => {
 document.addEventListener('ondataremove', () => {
     if(locationHere === "/main.html" || headPage === "Book"){
         validateData();
+
     }
 })
 
 function validateData(){
     const serializedData = localStorage.getItem(STORAGE_KEY);
 
-    const notFound = document.getElementsByClassName("not-found")[0]
+    const notFound = document.getElementsByClassName("not-found")[0];
     const getAllArticle = document.getElementsByTagName("article");
-    notFound.hidden = true
+    notFound.hidden = true;
 
     if(serializedData === "[]"){
         notFound.removeAttribute("hidden");

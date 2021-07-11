@@ -4,10 +4,10 @@ let books = [];
 
 function isStorageExist(){
     if(typeof(Storage) === undefined){
-        alert("Browser kamu tidak mendukung local storage")
-        return false
+        alert("Browser kamu tidak mendukung local storage");
+        return false;
     }
-    return true
+    return true;
 }
 
 function saveData(){
@@ -35,7 +35,7 @@ function updateDataToStorage(){
     }
 }
 
-function composeBookObject(title, desc, author, year, isCompleted, imgBook){
+function composeBookObject(title, desc, author, year, isCompleted, isFavorite){
     return {
         id: new Date(),
         title,
@@ -43,7 +43,7 @@ function composeBookObject(title, desc, author, year, isCompleted, imgBook){
         author, 
         year,
         isCompleted,
-        imgBook
+        isFavorite
     }
 }
 
@@ -77,10 +77,10 @@ function searchData(title){
         if(
             book.title.toLowerCase().trim().indexOf(title) !== undefined && 
             book.title.toLowerCase().trim().indexOf(title) !== -1){
-            bookSearch.push(book)
+            bookSearch.push(book);
         }
     }
-    return bookSearch
+    return bookSearch;
 }
 
 // function refreshFromBook(){

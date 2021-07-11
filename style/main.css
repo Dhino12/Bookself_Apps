@@ -109,7 +109,6 @@ header {
     color: #47daff;
 
 }
-
 /* end not found */
 
 /* article just-read */
@@ -189,6 +188,8 @@ header {
     border: none;
 }
 
+    /* -- icon -- */
+
 .icon-finish-read {
     background-image: url("../asset/icon/done.svg");
     width: 24px;
@@ -201,6 +202,16 @@ header {
 
 .icon-favorite{
     background-image: url("../asset/icon/favorite.svg");
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    float: left;
+    margin: 6px;
+    transition: 0.5s ease;
+}  
+
+.icon-favorited{
+    background-image: url("../asset/icon/favorited.svg");
     width: 24px;
     height: 24px;
     background-size: contain;
@@ -228,6 +239,8 @@ header {
     margin: 6px;
     transition: 0.5s ease;
 }  
+
+    /* -- end-icon -- */
 
 .content-book button:hover .icon-favorite,
 .content-book button:hover .icon-read {
