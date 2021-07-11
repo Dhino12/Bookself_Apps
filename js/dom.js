@@ -28,8 +28,6 @@ function addBook() {
     const textDescription = document.getElementById("description").value
     const textDate = document.getElementById("date").value.slice(0, 4);
 
-    console.log("title: " + textTitle + "\nYear: " + textDate)
-
     const bookObject = composeBookObject(textTitle, textDescription, textAuthor, textDate, false, false)
     
     books.push(bookObject);
@@ -58,9 +56,7 @@ function showBook() {
     }
 
 
-    // search book ===========
     document.getElementById('search-book').addEventListener("input", () => {
-        // completeBookList.style.display = "none";
         const titleBook = document.getElementById('search-book').value.toLowerCase().trim()
         const content_book = document.querySelectorAll(".content-book"); 
         const content_book_search = document.querySelectorAll(".content-book-search"); 
@@ -76,11 +72,10 @@ function showBook() {
         } 
 
         if(titleBook.length !== 0){
-            const bookSearch = searchData(titleBook)
-            console.log(bookSearch);
+            const bookSearch = searchData(titleBook);
 
             if(bookSearch === undefined){
-                // completeBookList.removeAttribute("style");
+                completeBookList.removeAttribute("style");
             }else{
                 for (const book of bookSearch) {
                     const newBook = makeBook(book.title, book.author, book.desc, book.year, book.isCompleted, true)
@@ -140,8 +135,6 @@ function makeBook(title, author, description, date, isCompleted, isSearch, isFav
     }
     
     container.append(textTitle, textAuthor, textYear, textDesc);
-    
-    console.log(isCompleted);
 
     if(headPage === "Book"){
         if (isCompleted) {
@@ -155,7 +148,6 @@ function makeBook(title, author, description, date, isCompleted, isSearch, isFav
         container.append(createFavoriteButton(isFavorite));
     }
     
-    console.log(container);
     return container;
 }
 
@@ -246,6 +238,7 @@ function addToFavorite(bookElement){
     }else{
         book.isFavorite = true;
     }
+
     updateDataToStorage();
 
 }
@@ -253,7 +246,6 @@ function addToFavorite(bookElement){
 function undoBookFromComplete(bookElement) {
     const listUncomplete = document.getElementById(LIST_UNCOMPLETE_READ_BOOK_ID);
 
-    // console.log(bookElement.querySelector("h2"));
     const bookTitle = bookElement.querySelector("h2").innerText;
     const bookAuthor = bookElement.querySelector(".author").innerText.split(' ')[2];
     const bookDesc = bookElement.querySelector(".description").innerText;

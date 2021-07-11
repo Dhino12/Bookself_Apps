@@ -428,4 +428,18 @@ header {
         left: 10%;
         right: 10%;
     }
+
+    .not-found{
+        position: relative;
+        left: 0%;
+    }
+
+    .not-found h2{
+        margin: 5% 20%;
+    }
+    
+    .not-found p{
+        padding: 0 50px;
+        line-height: 20px;
+    }
 }
