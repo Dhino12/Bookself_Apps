@@ -118,6 +118,7 @@ input[type="text"]:focus{
 }
 /* end-message */
 
+/* phone */
 @media only screen and (max-width: 1024px){
     .form-addBook{
         width: fit-content;
