@@ -57,9 +57,14 @@ function showBook() {
 
 
     document.getElementById('search-book').addEventListener("input", () => {
-        const titleBook = document.getElementById('search-book').value.toLowerCase().trim()
+        completeBookList.style.display = "none";
+        uncompleteBookList.removeAttribute('style');
+        const titleBook = document.getElementById('search-book').value.toLowerCase().trim();
         const content_book = document.querySelectorAll(".content-book"); 
         const content_book_search = document.querySelectorAll(".content-book-search"); 
+        const titlePage = document.querySelector('#content-title h1');
+        const notFound = document.getElementsByClassName('not-found')[0];
+        notFound.hidden = true;
 
         if(content_book.length !== 0){  
             for(let i = 0; i < content_book.length; i++){
@@ -73,18 +78,24 @@ function showBook() {
 
         if(titleBook.length !== 0){
             const bookSearch = searchData(titleBook);
-
-            if(bookSearch === undefined){
-                completeBookList.removeAttribute("style");
+            
+            if(bookSearch === undefined || bookSearch.length === 0){
+                notFound.removeAttribute('hidden');
+                uncompleteBookList.style.display = "none";
             }else{
+                titlePage.innerText = "Hasil Pencarian";
+                
                 for (const book of bookSearch) {
-                    const newBook = makeBook(book.title, book.author, book.desc, book.year, book.isCompleted, true)
+                    const newBook = makeBook(book.title, book.author, book.desc, book.year, book.isCompleted, true, book.isFavorite)
                     newBook[BOOK_ID] = book.id
                     uncompleteBookList.append(newBook);
                 }
             }
             
         }else{
+            titlePage.innerText = "Sedang dibaca";
+            completeBookList.removeAttribute("style");
+            console.log(titleBook.length);
             showBook()
         }
         

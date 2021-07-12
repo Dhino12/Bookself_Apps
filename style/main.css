@@ -141,21 +141,16 @@ header {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
-.content-book {
+.content-book,
+.content-book-search {
     width: 95%;
     margin-top: 40px;
     overflow: hidden;
     border-radius: 10px;
-}
-
-.content-book img {
-    width: 95px;
-    height: 151px;
-    float: left;
-    margin-right: 30px;
-}
+} 
  
-.content-book p {
+.content-book p,
+.content-book-search p {
     color: grey; 
 }
 
@@ -168,7 +163,8 @@ header {
     -webkit-box-orient: vertical;
 }
 
-.content-book h2{
+.content-book h2,
+.content-book-search h2{
     overflow: hidden;
     margin: 0px 0 10px 0;
     text-overflow: ellipsis;
@@ -179,7 +175,8 @@ header {
 
 /* ==== finish read button & favorite button ===== */
 
-.content-book button{ 
+.content-book button,
+.content-book-search button{ 
     background-color: #ececec;
     box-shadow: 2px 5px 10px #d8d8d8, -2px -2px 5px white;
     display: inline-block;
@@ -243,11 +240,14 @@ header {
     /* -- end-icon -- */
 
 .content-book button:hover .icon-favorite,
-.content-book button:hover .icon-read {
+.content-book button:hover .icon-read,
+.content-book-search button:hover .icon-favorite,
+.content-book-search button:hover .icon-read{
     transform: scale(0.9);
 }
 
-.content-book button:hover {
+.content-book button:hover,
+.content-book-search button:hover {
     cursor: pointer;
     box-shadow: 2px 5px 5px #dbdbdb inset, -2px -2px 5px white inset;
 }
@@ -441,5 +441,20 @@ header {
     .not-found p{
         padding: 0 50px;
         line-height: 20px;
+    }
+}
+
+@media only screen and (min-width: 1536px) {
+    
+    .just-read,
+    .already-read{
+        width: 30%;
+        margin-left: 100px;
+        margin-right: 0;
+    }
+
+    .message{
+        top: 25%;
+        left: 40%;
     }
 }
