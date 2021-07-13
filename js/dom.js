@@ -55,7 +55,6 @@ function showBook() {
 
     }
 
-
     document.getElementById('search-book').addEventListener("input", () => {
         completeBookList.style.display = "none";
         uncompleteBookList.removeAttribute('style');
@@ -95,7 +94,6 @@ function showBook() {
         }else{
             titlePage.innerText = "Sedang dibaca";
             completeBookList.removeAttribute("style");
-            console.log(titleBook.length);
             showBook()
         }
         
@@ -152,7 +150,7 @@ function makeBook(title, author, description, date, isCompleted, isSearch, isFav
             container.append(createUndoButton(), createRemoveButton());
     
         } else {
-            container.append(createFinishReadButton(), createFavoriteButton(isFavorite));
+            container.append(createFinishReadButton(), createFavoriteButton(isFavorite), createRemoveButton());
     
         }
     }else{
@@ -289,11 +287,12 @@ function removeBookFromComplete(bookElement){
     chooseYes.addEventListener('click', () => {
         removeData(bookPosition, 1);
         bookElement.remove();
-        messageRemove(bgMessage, message)
+        messageRemove(bgMessage, message);
+        localStorage.removeItem(STORAGE_KEY);
     })
 
     chooseNo.addEventListener('click', () => {
-        messageRemove(bgMessage, message)
+        messageRemove(bgMessage, message);
     })
 }
 

@@ -31,8 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 })
 
-console.log(window.location.pathname);
-
 document.addEventListener("ondataloaded", () => {
     if(locationHere === "/main.html" || headPage === "Book") {
         showBook();
@@ -76,7 +74,7 @@ function validateData(){
     const getAllArticle = document.getElementsByTagName("article");
     notFound.hidden = true;
 
-    if(serializedData === "[]"){
+    if(serializedData === "[]" || serializedData === undefined){
         notFound.removeAttribute("hidden");
 
         for (const article of getAllArticle) {

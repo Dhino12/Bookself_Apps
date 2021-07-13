@@ -20,11 +20,9 @@ function loadDataFromStorage(){
     const serializedData = localStorage.getItem(STORAGE_KEY);
 
     let data = JSON.parse(serializedData);
-    console.log("jsonData : " + data);
 
     if(data !== null){
         books = data;
-        console.log("Book data: " + books);
     }
     document.dispatchEvent(new Event("ondataloaded"));
 }
