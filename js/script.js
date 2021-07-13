@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
     }else if(locationHere === "/favorite.html" || headPage === "Favorite"){
         if(isStorageExist()){
-            validateData();
+            validationFavorite();
             loadDataFromStorage();
         }
     }
@@ -77,7 +77,6 @@ document.addEventListener('ondataremove', () => {
 document.addEventListener('ondatafavorited', () => {
     if(locationHere === "/favorite.html" || headPage === "Favorite"){
         validationFavorite();
-        console.log("Favorite");
 
     }
 })
@@ -95,6 +94,7 @@ function validateData(){
         for (const article of getAllArticle) {
             article.style.display = "none";
         }
+        // localStorage.removeItem(STORAGE_KEY);
 
     }
 }
@@ -103,13 +103,15 @@ function validationFavorite(){
     const notFound = document.getElementsByClassName("not-found")[0];
     const getAllArticle = document.getElementsByTagName("article")[0];
     
-    for (const book of books) {
-        if(book.isFavorite === false){
-            notFound.removeAttribute("hidden");
-            getAllArticle.style.display = "none";
-        }else{
-            getAllArticle.removeAttribute('style');
-            notFound.hidden = true;
-        }
+    const favoriteDetected = books.filter((book) => {
+        return book.isFavorite == true
+    })
+
+    if(favoriteDetected.length === 0){
+        notFound.removeAttribute("hidden");
+        getAllArticle.style.display = "none";
+    }else{
+        getAllArticle.removeAttribute('style');
+        notFound.hidden = true;
     }
 }

@@ -54,8 +54,9 @@ function findBook(bookId){
 
 function findBookIndex(bookId){
     let index = 0;
-    for (const book of books) {
-        if(book.id === bookId) return index;
+    for (let book of books) {
+        if(book.id === bookId) 
+            return index;
 
         index++;
     }
@@ -63,9 +64,12 @@ function findBookIndex(bookId){
 }
 
 function removeData(bookPosition, limitRemove){
+    console.log("Book Position: " + bookPosition);
+    console.log("limit Remove: " + limitRemove);
     books.splice(bookPosition, limitRemove);
     updateDataToStorage();
 
+    location.reload();
     document.dispatchEvent(new Event("ondataremove"));
 }
 
@@ -78,6 +82,7 @@ function searchData(title){
             bookSearch.push(book);
         }
     }
+    
     return bookSearch;
 }
 
@@ -91,7 +96,7 @@ function addToFavorite(bookElement){
     }
 
     document.dispatchEvent(new Event("ondatafavorited"));
-    
+
     updateDataToStorage();
 
 

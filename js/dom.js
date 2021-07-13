@@ -8,12 +8,14 @@ const headPage = document.getElementsByTagName("title")[0].innerText
 const itemSideBar = document.querySelectorAll(".item");
 
 for (const i in itemSideBar) {
-    if (window.location.pathname === "/addBook.html" || headPage === "Tambah Buku") {
+    if (headPage === "Tambah Buku") {
         itemSideBar[1].classList.add('active');
 
-    } else if (window.location.pathname === "/main.html" || headPage === "Book") {
+    } else if (headPage === "Book") {
         itemSideBar[0].classList.add('active');
 
+    }else if(headPage === "Favorite"){
+        itemSideBar[2].classList.add('active');
     }
 }
 // ==========================
@@ -138,7 +140,8 @@ function makeBook(title, author, description, date, isCompleted, isSearch, isFav
     textYear.classList.add("description");
     textYear.innerText = description;
 
-    const container = document.createElement("div")
+    const container = document.createElement("div");
+
     if(isSearch){
         container.classList.add("content-book-search");
     }else{
@@ -152,6 +155,7 @@ function makeBook(title, author, description, date, isCompleted, isSearch, isFav
             container.append(createUndoButton(), createRemoveButton());
     
         } else {
+            console.log("MASUK ELSE: " + isFavorite);
             container.append(createFinishReadButton(), createFavoriteButton(isFavorite), createRemoveButton());
     
         }
@@ -192,6 +196,7 @@ function createFinishReadButton() {
 }
 
 function createFavoriteButton(isFavorite) {
+    console.log("buat button Fav: " + isFavorite);
     if(isFavorite){
         return createButton('icon-favorited', function (e) {
             addToFavorite(e);
@@ -226,7 +231,7 @@ function addBookToFinishRead(bookElement) {
     const bookDesc = bookElement.querySelector(".description").innerText;
     const bookYear = bookElement.querySelector(".year").innerText.split(' ')[3];
 
-    const newBook = makeBook(bookTitle, bookAuthor, bookDesc, bookYear, true);
+    const newBook = makeBook(bookTitle, bookAuthor, bookDesc, bookYear, true, false);
     const listCompletedBook = document.getElementById(LIST_COMPLETE_READ_BOOK_ID);
 
     const book = findBook(bookElement[BOOK_ID]);
@@ -249,11 +254,11 @@ function undoBookFromComplete(bookElement) {
     const bookDesc = bookElement.querySelector(".description").innerText;
     const bookYear = bookElement.querySelector(".year").innerText.split(' ')[3];
 
-    const newBook = makeBook(bookTitle, bookAuthor, bookDesc, bookYear, false);
-
     const book = findBook(bookElement[BOOK_ID]);
-
     book.isCompleted = false;
+
+    const newBook = makeBook(bookTitle, bookAuthor, bookDesc, bookYear, false, false, book.isFavorite);
+
     newBook[BOOK_ID] = book.id;
 
     listUncomplete.append(newBook);
@@ -263,21 +268,24 @@ function undoBookFromComplete(bookElement) {
 }
 
 function removeBookFromComplete(bookElement){
-    const bookPosition = findBookIndex(bookElement[BOOK_ID])
     const message = document.getElementById("confirm");
     const bgMessage = document.getElementsByClassName("background-message")[0];
-
+    
     const chooseYes = document.getElementById("yes");
     const chooseNo = document.getElementById("no");
     
     bgMessage.classList.add("fade");
     message.classList.add("fade");
 
+    console.log("ID BOOK : ");
+    console.log(bookElement[BOOK_ID]);
+    console.log("============");
+    const bookPosition = findBookIndex(bookElement[BOOK_ID])
+    
     chooseYes.addEventListener('click', () => {
         removeData(bookPosition, 1);
         bookElement.remove();
         messageRemove(bgMessage, message);
-        localStorage.removeItem(STORAGE_KEY);
     })
 
     chooseNo.addEventListener('click', () => {
