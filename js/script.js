@@ -29,6 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    if(books.length === 0 && headPage === "Book"){
+        validateData();
+    }
+    
+    if(headPage === "Favorite"){
+        validationFavorite();
+    }
 })
 
 document.addEventListener("ondataloaded", () => {
@@ -67,6 +74,14 @@ document.addEventListener('ondataremove', () => {
     }
 })
 
+document.addEventListener('ondatafavorited', () => {
+    if(locationHere === "/favorite.html" || headPage === "Favorite"){
+        validationFavorite();
+        console.log("Favorite");
+
+    }
+})
+
 function validateData(){
     const serializedData = localStorage.getItem(STORAGE_KEY);
 
@@ -74,7 +89,7 @@ function validateData(){
     const getAllArticle = document.getElementsByTagName("article");
     notFound.hidden = true;
 
-    if(serializedData === "[]" || serializedData === undefined){
+    if(serializedData === "[]" || serializedData === null){
         notFound.removeAttribute("hidden");
 
         for (const article of getAllArticle) {
@@ -82,5 +97,19 @@ function validateData(){
         }
 
     }
+}
+
+function validationFavorite(){
+    const notFound = document.getElementsByClassName("not-found")[0];
+    const getAllArticle = document.getElementsByTagName("article")[0];
     
+    for (const book of books) {
+        if(book.isFavorite === false){
+            notFound.removeAttribute("hidden");
+            getAllArticle.style.display = "none";
+        }else{
+            getAllArticle.removeAttribute('style');
+            notFound.hidden = true;
+        }
+    }
 }

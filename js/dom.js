@@ -112,6 +112,8 @@ function showFavoriteBook(){
         if (book.isFavorite) { 
             favoritedBookList.append(newBook);
 
+        }else{
+
         }
 
     }
@@ -198,7 +200,7 @@ function createFavoriteButton(isFavorite) {
     }else{
         return createButton('icon-favorite', function (e) {
             addToFavorite(e);
-            location.reload()
+            location.reload();
         });
     }
     
@@ -237,19 +239,6 @@ function addBookToFinishRead(bookElement) {
     bookElement.remove();
 
     updateDataToStorage();
-}
-
-function addToFavorite(bookElement){
-    const book = findBook(bookElement[BOOK_ID]);
-
-    if(book.isFavorite === true){
-        book.isFavorite = false;
-    }else{
-        book.isFavorite = true;
-    }
-
-    updateDataToStorage();
-
 }
 
 function undoBookFromComplete(bookElement) {

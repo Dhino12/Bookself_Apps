@@ -42,12 +42,12 @@ function composeBookObject(title, desc, author, year, isCompleted, isFavorite){
         year,
         isCompleted,
         isFavorite
-    }
+    };
 }
 
 function findBook(bookId){
     for(book of books){
-        if(book.id === bookId) return book
+        if(book.id === bookId) return book;
     }
     return null;
 }
@@ -64,9 +64,9 @@ function findBookIndex(bookId){
 
 function removeData(bookPosition, limitRemove){
     books.splice(bookPosition, limitRemove);
-    updateDataToStorage()
+    updateDataToStorage();
 
-    document.dispatchEvent(new Event("ondataremove"))
+    document.dispatchEvent(new Event("ondataremove"));
 }
 
 function searchData(title){
@@ -79,6 +79,22 @@ function searchData(title){
         }
     }
     return bookSearch;
+}
+
+function addToFavorite(bookElement){
+    const book = findBook(bookElement[BOOK_ID]);
+
+    if(book.isFavorite === true){
+        book.isFavorite = false;
+    }else{
+        book.isFavorite = true;
+    }
+
+    document.dispatchEvent(new Event("ondatafavorited"));
+    
+    updateDataToStorage();
+
+
 }
 
 // function refreshFromBook(){
